@@ -13,15 +13,7 @@ const path = require("path");
 
 appendAsync = async (path, data) => {
 	try {
-		await fs.appendFile(path, `\n${data}`, "utf-8");
-	} catch (err) {
-		throw err;
-	}
-};
-
-newLine = async (path) => {
-	try {
-		await appendAsync(path, "");
+		await fs.appendFile(path, `\n${data}\n`, "utf-8");
 	} catch (err) {
 		throw err;
 	}
@@ -109,23 +101,26 @@ inquirer
 		} catch (err) {
 			throw err;
 		}
-
+		await appendAsync(outputDir, answers.license.badge);
 		await appendAsync(outputDir, `# ${answers.title}`);
-		await newLine(outputDir);
+
 		await appendAsync(outputDir, "## Description");
 		await appendAsync(outputDir, answers.description);
-		await newLine(outputDir);
+
 		await appendAsync(outputDir, "## Table of Contents");
-		await newLine(outputDir);
-		await appendAsync(outputDir, "##  Installation");
+
+		await appendAsync(outputDir, "## Installation");
 		await appendAsync(outputDir, answers.installation);
-		await newLine(outputDir);
+
 		await appendAsync(outputDir, "## Usage");
 		await appendAsync(outputDir, answers.usage);
-		await newLine(outputDir);
+
+		await appendAsync(outputDir, "## License");
+		await appendAsync(outputDir, answers.license.desc);
+
 		await appendAsync(outputDir, "## Contributing");
 		await appendAsync(outputDir, answers.contributing);
-		await newLine(outputDir);
+
 		await appendAsync(outputDir, "## Tests");
 		await appendAsync(outputDir, answers.tests);
 	});
