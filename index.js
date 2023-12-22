@@ -101,8 +101,6 @@ inquirer
 		const outputName = "README.md";
 		const outputDir = path.join(__dirname, "Output", outputName);
 
-		console.log(answers);
-
 		try {
 			await fs.writeFile(outputDir, "");
 		} catch (err) {
@@ -139,4 +137,6 @@ inquirer
 		await appendAsync(outputDir, "Please reach me at:");
 		await appendAsync(outputDir, `<https://github.com/${answers.github}>`);
 		await appendAsync(outputDir, `<mailto:${answers.email}>`);
+
+		console.log("Check Output/ !");
 	});
