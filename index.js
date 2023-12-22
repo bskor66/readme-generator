@@ -4,10 +4,6 @@ const path = require("path");
 
 // THEN a high-quality, professional README.md is generated with the  and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
 
-// WHEN I enter my GitHub username
-// THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
-// WHEN I enter my email address
-// THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
 // WHEN I click on the links in the Table of Contents
 // THEN I am taken to the corresponding section of the README
 
@@ -88,6 +84,18 @@ inquirer
 		{
 			name: "tests",
 			message: "Explain testing instructions:",
+			type: "input",
+		},
+		{
+			name: "github",
+			message: "what is your github username (no @):",
+			type: "input",
+		},
+		,
+		{
+			name: "email",
+			message: "what is your email:",
+			type: "input",
 		},
 	])
 	.then(async (answers) => {
@@ -123,4 +131,9 @@ inquirer
 
 		await appendAsync(outputDir, "## Tests");
 		await appendAsync(outputDir, answers.tests);
+
+		await appendAsync(outputDir, "## Questions");
+		await appendAsync(outputDir, "Please reach me at:");
+		await appendAsync(outputDir, `https://github.com/${answers.github}`);
+		await appendAsync(outputDir, `mailto:${answers.email}`);
 	});
