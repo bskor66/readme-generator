@@ -91,7 +91,6 @@ inquirer
 			message: "what is your github username (no @):",
 			type: "input",
 		},
-		,
 		{
 			name: "email",
 			message: "what is your email:",
@@ -116,6 +115,10 @@ inquirer
 		await appendAsync(outputDir, answers.description);
 
 		await appendAsync(outputDir, "## Table of Contents");
+		await appendAsync(
+			outputDir,
+			"- [Description](#description)\n- [Installation](#installation)\n- [Usage](#usage)\n- [License](#license)\n- [Contributing](#contributing)\n- [Tests](#tests)\n- [Questions](#questions)"
+		);
 
 		await appendAsync(outputDir, "## Installation");
 		await appendAsync(outputDir, answers.installation);
@@ -134,6 +137,6 @@ inquirer
 
 		await appendAsync(outputDir, "## Questions");
 		await appendAsync(outputDir, "Please reach me at:");
-		await appendAsync(outputDir, `https://github.com/${answers.github}`);
-		await appendAsync(outputDir, `mailto:${answers.email}`);
+		await appendAsync(outputDir, `<https://github.com/${answers.github}>`);
+		await appendAsync(outputDir, `<mailto:${answers.email}>`);
 	});
